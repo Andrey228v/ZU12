@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placePoints: {fileID: 1140834352}
-  _speed: 5
+  _speed: 10
 --- !u!136 &1382245530
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1313,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5115908768678103374, guid: a19830e9d553ce340a5576672c3ba401, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.202553
+      value: 8.15
       objectReference: {fileID: 0}
     - target: {fileID: 5115908768678103374, guid: a19830e9d553ce340a5576672c3ba401, type: 3}
       propertyPath: m_LocalPosition.z

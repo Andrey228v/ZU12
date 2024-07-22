@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6812272753855174567}
   - component: {fileID: 1245042207761311491}
   - component: {fileID: 1553755460506943585}
-  - component: {fileID: 2897564886879472914}
+  - component: {fileID: 4854760834307954437}
   m_Layer: 0
   m_Name: Zone
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2897564886879472914
+--- !u!114 &4854760834307954437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2097200801540003651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9be335dcf92054ca31d61cbd0284cb, type: 3}
+  m_Script: {fileID: 11500000, guid: b56ae35fcfb23d94da4af62d80b19e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6377506460485583738
@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 1659598648491462373}
   - component: {fileID: 4318111462667013721}
   - component: {fileID: 8048385606120152420}
-  - component: {fileID: 6286508857886983841}
   m_Layer: 0
   m_Name: Device
   m_TagString: Untagged
@@ -224,18 +223,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6286508857886983841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6377506460485583738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b232a21f7108e458a359977a9ea2f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8564750963562178668
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,8 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231ccb6dc207ccd49b13b043899719f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _device: {fileID: 6286508857886983841}
-  _zone: {fileID: 2897564886879472914}
+  _zone: {fileID: 4854760834307954437}
 --- !u!82 &-7286866046262761772
 AudioSource:
   m_ObjectHideFlags: 0

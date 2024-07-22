@@ -16,7 +16,7 @@ public class PositionChanger : MonoBehaviour
 
         for (int i = 0; i < _placePoints.childCount; i++)
         {
-            _places.Add(_placePoints.GetChild(i).GetComponent<Transform>());
+            _places.Add(_placePoints.GetChild(i).transform);
         }
 
         _nextPlace = _places[_placePointIndex];
@@ -25,12 +25,12 @@ public class PositionChanger : MonoBehaviour
     private void Update()
     {
         if (transform.position == _nextPlace.position)
-            NextPoint();
+            ChangePoint();
 
         transform.position = Vector3.MoveTowards(transform.position, _nextPlace.position, _speed * Time.deltaTime);
     }
 
-    private void NextPoint()
+    private void ChangePoint()
     {
         _placePointIndex = ++_placePointIndex % _places.Count;
 

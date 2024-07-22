@@ -61,9 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Alarm\Alarm.cs" />
-    <Compile Include="Assets\Scripts\Alarm\AlarmZone.cs" />
+    <Compile Include="Assets\Scripts\Alarm\Zone.cs" />
     <Compile Include="Assets\Scripts\PositionChanger.cs" />
-    <Compile Include="Assets\Scripts\Alarm\AlarmDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

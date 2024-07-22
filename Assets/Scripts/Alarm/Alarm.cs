@@ -4,15 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AlarmDevice _device;
-    [SerializeField] private AlarmZone _zone;
+    [SerializeField] private Zone _zone;
 
     private AudioSource _audioSource;
-    private bool _isActivated = false;
+    private bool _isActivated = true;
     private float _currentVolume = 0;
     private float _minVolume = 0;
     private float _maxVolume = 1;
+    private float _step = 0.2f;
 
+    private Coroutine _volumeChangerCoroutine;
 
     private void Start()
     {
@@ -21,53 +22,56 @@ public class Alarm : MonoBehaviour
 
     private void OnEnable()
     {
-        _zone.OnZoneEntered += AlarmActiveted;
-        _zone.OnZoneExited += AlarmDiactivated;
+        _zone.OnZoneEntered += Activeted;
+        _zone.OnZoneExited += Diactivated;
     }
 
     private void OnDisable()
     {
-        _zone.OnZoneEntered -= AlarmActiveted;
-        _zone.OnZoneExited -= AlarmDiactivated;
+        _zone.OnZoneEntered -= Activeted;
+        _zone.OnZoneExited -= Diactivated;
     }
 
-    private void AlarmActiveted()
+    private void Activeted()
     {
-        _isActivated = true;
+        StopCurrentCoroutine(_volumeChangerCoroutine);
+
         _audioSource.volume = _currentVolume;
         _audioSource.Play();
 
-        StartCoroutine(VolumeChanger(_currentVolume, _maxVolume));
+        _volumeChangerCoroutine = StartCoroutine(VolumeChanger(_maxVolume, _step));
     }
 
-    private void AlarmDiactivated()
+    private void Diactivated()
     {
-        _isActivated = false;
+        StopCurrentCoroutine(_volumeChangerCoroutine);
+
+        _volumeChangerCoroutine = StartCoroutine(VolumeChanger(_minVolume, _step));
     }
 
-    private IEnumerator VolumeChanger(float currentVolume, float comingVolume)
+    private void StopCurrentCoroutine(Coroutine coroutine)
+    {
+        if(coroutine != null )
+        {
+            StopCoroutine(coroutine);
+        }
+    }
+
+    private IEnumerator VolumeChanger(float comingVolume, float step)
     {   
         while (_isActivated)
         {
-            _audioSource.volume = Mathf.MoveTowards(currentVolume, comingVolume, 0.2f * Time.deltaTime);
-            currentVolume = _audioSource.volume;
+            _audioSource.volume = Mathf.MoveTowards(_currentVolume, comingVolume, step * Time.deltaTime);
+            _currentVolume = _audioSource.volume;
 
-            yield return currentVolume;
-        }
-
-        while (_isActivated == false)
-        {
-            _audioSource.volume = Mathf.MoveTowards(currentVolume, 0, 0.2f * Time.deltaTime);
-            currentVolume = _audioSource.volume;
-
-            if(currentVolume <= _minVolume)
+            if (_currentVolume <= _minVolume)
             {
                 _audioSource.Stop();
 
                 yield break;
             }
 
-            yield return currentVolume;
+            yield return _currentVolume;
         }
     }
 }
