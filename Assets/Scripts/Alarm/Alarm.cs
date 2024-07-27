@@ -34,19 +34,21 @@ public class Alarm : MonoBehaviour
 
     private void Activeted()
     {
-        StopCurrentCoroutine(_volumeChangerCoroutine);
-
         _audioSource.volume = _currentVolume;
         _audioSource.Play();
 
-        _volumeChangerCoroutine = StartCoroutine(VolumeChanger(_maxVolume, _step));
+        RestartCoroutine(_maxVolume, _step);
     }
 
     private void Diactivated()
     {
-        StopCurrentCoroutine(_volumeChangerCoroutine);
+        RestartCoroutine(_minVolume, _step);
+    }
 
-        _volumeChangerCoroutine = StartCoroutine(VolumeChanger(_minVolume, _step));
+    private void RestartCoroutine(float volume, float step)
+    {
+        StopCurrentCoroutine(_volumeChangerCoroutine);
+        _volumeChangerCoroutine = StartCoroutine(VolumeChanger(volume, step));
     }
 
     private void StopCurrentCoroutine(Coroutine coroutine)
