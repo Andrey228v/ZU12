@@ -22,14 +22,14 @@ public class Alarm : MonoBehaviour
 
     private void OnEnable()
     {
-        _zone.OnZoneEntered += Activeted;
-        _zone.OnZoneExited += Diactivated;
+        _zone.EnteredZone += Activeted;
+        _zone.LeftZone += Diactivated;
     }
 
     private void OnDisable()
     {
-        _zone.OnZoneEntered -= Activeted;
-        _zone.OnZoneExited -= Diactivated;
+        _zone.EnteredZone -= Activeted;
+        _zone.LeftZone -= Diactivated;
     }
 
     private void Activeted()
@@ -48,6 +48,7 @@ public class Alarm : MonoBehaviour
     private void RestartCoroutine(float volume, float step)
     {
         StopCurrentCoroutine(_volumeChangerCoroutine);
+        _isActivated = true;
         _volumeChangerCoroutine = StartCoroutine(VolumeChanger(volume, step));
     }
 
@@ -68,12 +69,12 @@ public class Alarm : MonoBehaviour
 
             if (_currentVolume <= _minVolume)
             {
-                _audioSource.Stop();
-
-                yield break;
+                _isActivated = false;
             }
 
-            yield return _currentVolume;
+            yield return null;
         }
+
+        _audioSource.Stop();
     }
 }

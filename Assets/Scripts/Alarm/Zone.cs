@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    public event Action OnZoneEntered;
-    public event Action OnZoneExited;
+    public event Action EnteredZone;
+    public event Action LeftZone;
 
     private void OnTriggerEnter(Collider other)
     {
-        OnZoneEntered();
+        EnteredZone?.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        OnZoneExited();
+        LeftZone?.Invoke();
     }
 }
